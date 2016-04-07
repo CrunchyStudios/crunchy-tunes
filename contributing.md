@@ -139,28 +139,25 @@ else, just repeat again.
 
 Thanks for contributing!
 
-### Rebase upstream changes into your branch
+### Merging a pull request
 
-Once you are done making changes, you can begin the process of getting
-your code merged into the main repo. Step 1 is to rebase upstream
-changes to the master branch into yours by running this command
-from your branch:
+Only merge a pull request after it has been reviewed during team code reviews. DO NOT merge your own pull request... EVER. Check that a pull request complies with all the guidelines above before merging. 
+
+GitHub by default merges pull request using the --no-ff option (no fast forward merge), which created superfluous merge commits in the repo history. This is not desirable.
+
+Instead use the following manual instructions to merge a pull request (assumes that the main repo is added to your local repo as a remote called 'upstream'):
 
 ```bash
-git checkout master
-git fetch upstream
-git pull --rebase upstream master
-git checkout -b pull_request_branch_name upstream/pull_request_branch_name
-git merge master
-```
-If you get merge conflicts at this point, abort the process and tell the contributor to update their pull request by using 'git pull --rebase upstream master' into their feature branch and pushing their changes.
+git checkout -b [contributors_username]-[pull_request_branch_name]
+git pull [contributors_fork_url] [pull_request_branch_name]
 
-If the merge succeeds without conflicts, finish merging the pull request:
-```
 git checkout master
-git merge pull_request_branch_name
-git push upstream master
+git pull --rebase upstream master
+git merge [contributors_username]-[pull_request_branch_name]
 ```
+If you get merge conflicts at this point, abort the process and tell the contributor to update their pull request by using 'git pull --rebase upstream master' into their feature branch, resolving conflicts, and pushing their changes to update their pull request.
+
+If the merge succeeds without conflicts, finish merging the pull request by typing `git push upstream master`
 
 ### Guidelines
 
