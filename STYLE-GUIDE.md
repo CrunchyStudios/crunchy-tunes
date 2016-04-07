@@ -380,483 +380,483 @@ When writing any block of code that is logically subordinate to the line immedia
     ```
 
 ### React/JSX
+```
+*A mostly reasonable approach to React and JSX*
+
 
-    *A mostly reasonable approach to React and JSX*
+## Basic Rules
 
+  - Only include one React component per file.
+    - However, multiple [Stateless, or Pure, Components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) are allowed per file. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
+  - Always use JSX syntax.
+  - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
 
-    ## Basic Rules
+## Class vs `React.createClass` vs stateless
 
-      - Only include one React component per file.
-        - However, multiple [Stateless, or Pure, Components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) are allowed per file. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
-      - Always use JSX syntax.
-      - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
+  - If you have internal state and/or refs, prefer `class extends React.Component` over `React.createClass` unless you have a very good reason to use mixins. eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
 
-    ## Class vs `React.createClass` vs stateless
+    ```jsx
+    // bad
+    const Listing = React.createClass({
+      // ...
+      render() {
+        return <div>{this.state.hello}</div>;
+      }
+    });
 
-      - If you have internal state and/or refs, prefer `class extends React.Component` over `React.createClass` unless you have a very good reason to use mixins. eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
+    // good
+    class Listing extends React.Component {
+      // ...
+      render() {
+        return <div>{this.state.hello}</div>;
+      }
+    }
+    ```
 
-        ```jsx
-        // bad
-        const Listing = React.createClass({
-          // ...
-          render() {
-            return <div>{this.state.hello}</div>;
-          }
-        });
+    And if you don't have state or refs, prefer normal functions (not arrow functions) over classes:
 
-        // good
-        class Listing extends React.Component {
-          // ...
-          render() {
-            return <div>{this.state.hello}</div>;
-          }
-        }
-        ```
+    ```jsx
+    // bad
+    class Listing extends React.Component {
+      render() {
+        return <div>{this.props.hello}</div>;
+      }
+    }
 
-        And if you don't have state or refs, prefer normal functions (not arrow functions) over classes:
+    // bad (since arrow functions do not have a "name" property)
+    const Listing = ({ hello }) => (
+      <div>{hello}</div>
+    );
 
-        ```jsx
-        // bad
-        class Listing extends React.Component {
-          render() {
-            return <div>{this.props.hello}</div>;
-          }
-        }
+    // good
+    function Listing({ hello }) {
+      return <div>{hello}</div>;
+    }
+    ```
 
-        // bad (since arrow functions do not have a "name" property)
-        const Listing = ({ hello }) => (
-          <div>{hello}</div>
-        );
+## Naming
 
-        // good
-        function Listing({ hello }) {
-          return <div>{hello}</div>;
-        }
-        ```
+  - **Extensions**: Use `.jsx` extension for React components.
+  - **Filename**: Use PascalCase for filenames. E.g., `ReservationCard.jsx`.
+  - **Reference Naming**: Use PascalCase for React components and camelCase for their instances. eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
 
-    ## Naming
+    ```jsx
+    // bad
+    import reservationCard from './ReservationCard';
 
-      - **Extensions**: Use `.jsx` extension for React components.
-      - **Filename**: Use PascalCase for filenames. E.g., `ReservationCard.jsx`.
-      - **Reference Naming**: Use PascalCase for React components and camelCase for their instances. eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
+    // good
+    import ReservationCard from './ReservationCard';
 
-        ```jsx
-        // bad
-        import reservationCard from './ReservationCard';
+    // bad
+    const ReservationItem = <ReservationCard />;
 
-        // good
-        import ReservationCard from './ReservationCard';
+    // good
+    const reservationItem = <ReservationCard />;
+    ```
 
-        // bad
-        const ReservationItem = <ReservationCard />;
+  - **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.jsx` as the filename and use the directory name as the component name:
 
-        // good
-        const reservationItem = <ReservationCard />;
-        ```
+    ```jsx
+    // bad
+    import Footer from './Footer/Footer';
 
-      - **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.jsx` as the filename and use the directory name as the component name:
+    // bad
+    import Footer from './Footer/index';
 
-        ```jsx
-        // bad
-        import Footer from './Footer/Footer';
+    // good
+    import Footer from './Footer';
+    ```
 
-        // bad
-        import Footer from './Footer/index';
+## Declaration
 
-        // good
-        import Footer from './Footer';
-        ```
+  - Do not use `displayName` for naming components. Instead, name the component by reference.
 
-    ## Declaration
+    ```jsx
+    // bad
+    export default React.createClass({
+      displayName: 'ReservationCard',
+      // stuff goes here
+    });
 
-      - Do not use `displayName` for naming components. Instead, name the component by reference.
+    // good
+    export default class ReservationCard extends React.Component {
+    }
+    ```
 
-        ```jsx
-        // bad
-        export default React.createClass({
-          displayName: 'ReservationCard',
-          // stuff goes here
-        });
+## Alignment
 
-        // good
-        export default class ReservationCard extends React.Component {
-        }
-        ```
+  - Follow these alignment styles for JSX syntax. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
-    ## Alignment
+    ```jsx
+    // bad
+    <Foo superLongParam="bar"
+         anotherSuperLongParam="baz" />
 
-      - Follow these alignment styles for JSX syntax. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
+    // good
+    <Foo
+      superLongParam="bar"
+      anotherSuperLongParam="baz"
+    />
 
-        ```jsx
-        // bad
-        <Foo superLongParam="bar"
-             anotherSuperLongParam="baz" />
+    // if props fit in one line then keep it on the same line
+    <Foo bar="bar" />
 
-        // good
-        <Foo
-          superLongParam="bar"
-          anotherSuperLongParam="baz"
-        />
+    // children get indented normally
+    <Foo
+      superLongParam="bar"
+      anotherSuperLongParam="baz"
+    >
+      <Quux />
+    </Foo>
+    ```
 
-        // if props fit in one line then keep it on the same line
-        <Foo bar="bar" />
+## Quotes
 
-        // children get indented normally
-        <Foo
-          superLongParam="bar"
-          anotherSuperLongParam="baz"
-        >
-          <Quux />
-        </Foo>
-        ```
+  - Always use double quotes (`"`) for JSX attributes, but single quotes for all other JS. eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
 
-    ## Quotes
+  > Why? JSX attributes [can't contain escaped quotes](http://eslint.org/docs/rules/jsx-quotes), so double quotes make conjunctions like `"don't"` easier to type.
+  > Regular HTML attributes also typically use double quotes instead of single, so JSX attributes mirror this convention.
 
-      - Always use double quotes (`"`) for JSX attributes, but single quotes for all other JS. eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
+    ```jsx
+    // bad
+    <Foo bar='bar' />
 
-      > Why? JSX attributes [can't contain escaped quotes](http://eslint.org/docs/rules/jsx-quotes), so double quotes make conjunctions like `"don't"` easier to type.
-      > Regular HTML attributes also typically use double quotes instead of single, so JSX attributes mirror this convention.
+    // good
+    <Foo bar="bar" />
 
-        ```jsx
-        // bad
-        <Foo bar='bar' />
+    // bad
+    <Foo style={{ left: "20px" }} />
 
-        // good
-        <Foo bar="bar" />
+    // good
+    <Foo style={{ left: '20px' }} />
+    ```
 
-        // bad
-        <Foo style={{ left: "20px" }} />
+## Spacing
 
-        // good
-        <Foo style={{ left: '20px' }} />
-        ```
+  - Always include a single space in your self-closing tag.
 
-    ## Spacing
+    ```jsx
+    // bad
+    <Foo/>
 
-      - Always include a single space in your self-closing tag.
+    // very bad
+    <Foo                 />
 
-        ```jsx
-        // bad
-        <Foo/>
+    // bad
+    <Foo
+     />
 
-        // very bad
-        <Foo                 />
+    // good
+    <Foo />
+    ```
 
-        // bad
-        <Foo
-         />
+## Props
 
-        // good
-        <Foo />
-        ```
+  - Always use camelCase for prop names.
 
-    ## Props
+    ```jsx
+    // bad
+    <Foo
+      UserName="hello"
+      phone_number={12345678}
+    />
 
-      - Always use camelCase for prop names.
+    // good
+    <Foo
+      userName="hello"
+      phoneNumber={12345678}
+    />
+    ```
 
-        ```jsx
-        // bad
-        <Foo
-          UserName="hello"
-          phone_number={12345678}
-        />
+  - Omit the value of the prop when it is explicitly `true`. eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
 
-        // good
-        <Foo
-          userName="hello"
-          phoneNumber={12345678}
-        />
-        ```
+    ```jsx
+    // bad
+    <Foo
+      hidden={true}
+    />
 
-      - Omit the value of the prop when it is explicitly `true`. eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
+    // good
+    <Foo
+      hidden
+    />
+    ```
 
-        ```jsx
-        // bad
-        <Foo
-          hidden={true}
-        />
+  - Always include a non-empty `alt` prop on `<img>` tags. If `alt` is an empty string, the `<img>` must have `role="presentation"`. eslint: [`jsx-a11y/img-uses-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-uses-alt.md)
 
-        // good
-        <Foo
-          hidden
-        />
-        ```
+    ```jsx
+    // bad
+    <img src="hello.jpg" />
 
-      - Always include a non-empty `alt` prop on `<img>` tags. If `alt` is an empty string, the `<img>` must have `role="presentation"`. eslint: [`jsx-a11y/img-uses-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-uses-alt.md)
+    // bad
+    <img src="hello.jpg" alt="" />
 
-        ```jsx
-        // bad
-        <img src="hello.jpg" />
+    // good
+    <img src="hello.jpg" alt="Me waving hello" />
 
-        // bad
-        <img src="hello.jpg" alt="" />
+    // good
+    <img src="hello.jpg" alt="" role="presentation" />
+    ```
 
-        // good
-        <img src="hello.jpg" alt="Me waving hello" />
+  - Do not use words like "image", "photo", or "picture" in `<img>` `alt` props. eslint: [`jsx-a11y/redundant-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-uses-alt.md)
 
-        // good
-        <img src="hello.jpg" alt="" role="presentation" />
-        ```
+  > Why? Screenreaders already announce `img` elements as images, so there is no need to include this information in the alt text.
 
-      - Do not use words like "image", "photo", or "picture" in `<img>` `alt` props. eslint: [`jsx-a11y/redundant-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-uses-alt.md)
+    ```jsx
+    // bad
+    <img src="hello.jpg" alt="Picture of me waving hello" />
 
-      > Why? Screenreaders already announce `img` elements as images, so there is no need to include this information in the alt text.
+    // good
+    <img src="hello.jpg" alt="Me waving hello" />
+    ```
 
-        ```jsx
-        // bad
-        <img src="hello.jpg" alt="Picture of me waving hello" />
+  - Use only valid, non-abstract [ARIA roles](https://www.w3.org/TR/wai-aria/roles#role_definitions). eslint: [`jsx-a11y/valid-aria-role`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/valid-aria-role.md)
 
-        // good
-        <img src="hello.jpg" alt="Me waving hello" />
-        ```
+    ```jsx
+    // bad - not an ARIA role
+    <div role="datepicker" />
 
-      - Use only valid, non-abstract [ARIA roles](https://www.w3.org/TR/wai-aria/roles#role_definitions). eslint: [`jsx-a11y/valid-aria-role`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/valid-aria-role.md)
+    // bad - abstract ARIA role
+    <div role="range" />
 
-        ```jsx
-        // bad - not an ARIA role
-        <div role="datepicker" />
+    // good
+    <div role="button" />
+    ```
 
-        // bad - abstract ARIA role
-        <div role="range" />
+  - Do not use `accessKey` on elements. eslint: [`jsx-a11y/no-access-key`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md)
 
-        // good
-        <div role="button" />
-        ```
+  > Why? Inconsistencies between keyboard shortcuts and keyboard commands used by people using screenreaders and keyboards complicate accessibility.
 
-      - Do not use `accessKey` on elements. eslint: [`jsx-a11y/no-access-key`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md)
+  ```jsx
+  // bad
+  <div accessKey="h" />
 
-      > Why? Inconsistencies between keyboard shortcuts and keyboard commands used by people using screenreaders and keyboards complicate accessibility.
+  // good
+  <div />
+  ```
 
-      ```jsx
-      // bad
-      <div accessKey="h" />
+## Parentheses
 
-      // good
-      <div />
-      ```
+  - Wrap JSX tags in parentheses when they span more than one line. eslint: [`react/wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md)
 
-    ## Parentheses
+    ```jsx
+    // bad
+    render() {
+      return <MyComponent className="long body" foo="bar">
+               <MyChild />
+             </MyComponent>;
+    }
 
-      - Wrap JSX tags in parentheses when they span more than one line. eslint: [`react/wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md)
+    // good
+    render() {
+      return (
+        <MyComponent className="long body" foo="bar">
+          <MyChild />
+        </MyComponent>
+      );
+    }
 
-        ```jsx
-        // bad
-        render() {
-          return <MyComponent className="long body" foo="bar">
-                   <MyChild />
-                 </MyComponent>;
-        }
+    // good, when single line
+    render() {
+      const body = <div>hello</div>;
+      return <MyComponent>{body}</MyComponent>;
+    }
+    ```
 
-        // good
-        render() {
-          return (
-            <MyComponent className="long body" foo="bar">
-              <MyChild />
-            </MyComponent>
-          );
-        }
+## Tags
 
-        // good, when single line
-        render() {
-          const body = <div>hello</div>;
-          return <MyComponent>{body}</MyComponent>;
-        }
-        ```
+  - Always self-close tags that have no children. eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
 
-    ## Tags
+    ```jsx
+    // bad
+    <Foo className="stuff"></Foo>
 
-      - Always self-close tags that have no children. eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
+    // good
+    <Foo className="stuff" />
+    ```
 
-        ```jsx
-        // bad
-        <Foo className="stuff"></Foo>
+  - If your component has multi-line properties, close its tag on a new line. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
-        // good
-        <Foo className="stuff" />
-        ```
+    ```jsx
+    // bad
+    <Foo
+      bar="bar"
+      baz="baz" />
 
-      - If your component has multi-line properties, close its tag on a new line. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
-
-        ```jsx
-        // bad
-        <Foo
-          bar="bar"
-          baz="baz" />
-
-        // good
-        <Foo
-          bar="bar"
-          baz="baz"
-        />
-        ```
-
-    ## Methods
-
-      - Use arrow functions to close over local variables.
-
-        ```jsx
-        function ItemList(props) {
-          return (
-            <ul>
-              {props.items.map((item, index) => (
-                <Item
-                  key={item.key}
-                  onClick={() => doSomethingWith(item.name, index)}
-                />
-              ))}
-            </ul>
-          );
-        }
-        ```
-
-      - Bind event handlers for the render method in the constructor. eslint: [`react/jsx-no-bind`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
-
-      > Why? A bind call in the render path creates a brand new function on every single render.
-
-        ```jsx
-        // bad
-        class extends React.Component {
-          onClickDiv() {
-            // do stuff
-          }
-
-          render() {
-            return <div onClick={this.onClickDiv.bind(this)} />
-          }
-        }
-
-        // good
-        class extends React.Component {
-          constructor(props) {
-            super(props);
-
-            this.onClickDiv = this.onClickDiv.bind(this);
-          }
-
-          onClickDiv() {
-            // do stuff
-          }
-
-          render() {
-            return <div onClick={this.onClickDiv} />
-          }
-        }
-        ```
-
-      - Do not use underscore prefix for internal methods of a React component.
-
-        ```jsx
-        // bad
-        React.createClass({
-          _onClickSubmit() {
-            // do stuff
-          },
-
-          // other stuff
-        });
-
-        // good
-        class extends React.Component {
-          onClickSubmit() {
-            // do stuff
-          }
-
-          // other stuff
-        }
-        ```
-
-      - Be sure to return a value in your `render` methods. eslint: [`require-render-return`](https://github.com/yannickcr/eslint-plugin-react/pull/502)
-
-        ```jsx
-        // bad
-        render() {
-          (<div />);
-        }
-
-        // good
-        render() {
-          return (<div />);
-        }
-        ```
-
-    ## Ordering
-
-      - Ordering for `class extends React.Component`:
-
-      1. optional `static` methods
-      1. `constructor`
-      1. `getChildContext`
-      1. `componentWillMount`
-      1. `componentDidMount`
-      1. `componentWillReceiveProps`
-      1. `shouldComponentUpdate`
-      1. `componentWillUpdate`
-      1. `componentDidUpdate`
-      1. `componentWillUnmount`
-      1. *clickHandlers or eventHandlers* like `onClickSubmit()` or `onChangeDescription()`
-      1. *getter methods for `render`* like `getSelectReason()` or `getFooterContent()`
-      1. *Optional render methods* like `renderNavigation()` or `renderProfilePicture()`
-      1. `render`
-
-      - How to define `propTypes`, `defaultProps`, `contextTypes`, etc...
-
-        ```jsx
-        import React, { PropTypes } from 'react';
-
-        const propTypes = {
-          id: PropTypes.number.isRequired,
-          url: PropTypes.string.isRequired,
-          text: PropTypes.string,
-        };
-
-        const defaultProps = {
-          text: 'Hello World',
-        };
-
-        class Link extends React.Component {
-          static methodsAreOk() {
-            return true;
-          }
-
-          render() {
-            return <a href={this.props.url} data-id={this.props.id}>{this.props.text}</a>
-          }
-        }
-
-        Link.propTypes = propTypes;
-        Link.defaultProps = defaultProps;
-
-        export default Link;
-        ```
-
-      - Ordering for `React.createClass`: eslint: [`react/sort-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md)
-
-      1. `displayName`
-      1. `propTypes`
-      1. `contextTypes`
-      1. `childContextTypes`
-      1. `mixins`
-      1. `statics`
-      1. `defaultProps`
-      1. `getDefaultProps`
-      1. `getInitialState`
-      1. `getChildContext`
-      1. `componentWillMount`
-      1. `componentDidMount`
-      1. `componentWillReceiveProps`
-      1. `shouldComponentUpdate`
-      1. `componentWillUpdate`
-      1. `componentDidUpdate`
-      1. `componentWillUnmount`
-      1. *clickHandlers or eventHandlers* like `onClickSubmit()` or `onChangeDescription()`
-      1. *getter methods for `render`* like `getSelectReason()` or `getFooterContent()`
-      1. *Optional render methods* like `renderNavigation()` or `renderProfilePicture()`
-      1. `render`
-
-    ## `isMounted`
-
-      - Do not use `isMounted`. eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
-
-      > Why? [`isMounted` is an anti-pattern][anti-pattern], is not available when using ES6 classes, and is on its way to being officially deprecated.
-
-      [anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+    // good
+    <Foo
+      bar="bar"
+      baz="baz"
+    />
+    ```
+
+## Methods
+
+  - Use arrow functions to close over local variables.
+
+    ```jsx
+    function ItemList(props) {
+      return (
+        <ul>
+          {props.items.map((item, index) => (
+            <Item
+              key={item.key}
+              onClick={() => doSomethingWith(item.name, index)}
+            />
+          ))}
+        </ul>
+      );
+    }
+    ```
+
+  - Bind event handlers for the render method in the constructor. eslint: [`react/jsx-no-bind`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
+
+  > Why? A bind call in the render path creates a brand new function on every single render.
+
+    ```jsx
+    // bad
+    class extends React.Component {
+      onClickDiv() {
+        // do stuff
+      }
+
+      render() {
+        return <div onClick={this.onClickDiv.bind(this)} />
+      }
+    }
+
+    // good
+    class extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.onClickDiv = this.onClickDiv.bind(this);
+      }
+
+      onClickDiv() {
+        // do stuff
+      }
+
+      render() {
+        return <div onClick={this.onClickDiv} />
+      }
+    }
+    ```
+
+  - Do not use underscore prefix for internal methods of a React component.
+
+    ```jsx
+    // bad
+    React.createClass({
+      _onClickSubmit() {
+        // do stuff
+      },
+
+      // other stuff
+    });
+
+    // good
+    class extends React.Component {
+      onClickSubmit() {
+        // do stuff
+      }
+
+      // other stuff
+    }
+    ```
+
+  - Be sure to return a value in your `render` methods. eslint: [`require-render-return`](https://github.com/yannickcr/eslint-plugin-react/pull/502)
+
+    ```jsx
+    // bad
+    render() {
+      (<div />);
+    }
+
+    // good
+    render() {
+      return (<div />);
+    }
+    ```
+
+## Ordering
+
+  - Ordering for `class extends React.Component`:
+
+  1. optional `static` methods
+  1. `constructor`
+  1. `getChildContext`
+  1. `componentWillMount`
+  1. `componentDidMount`
+  1. `componentWillReceiveProps`
+  1. `shouldComponentUpdate`
+  1. `componentWillUpdate`
+  1. `componentDidUpdate`
+  1. `componentWillUnmount`
+  1. *clickHandlers or eventHandlers* like `onClickSubmit()` or `onChangeDescription()`
+  1. *getter methods for `render`* like `getSelectReason()` or `getFooterContent()`
+  1. *Optional render methods* like `renderNavigation()` or `renderProfilePicture()`
+  1. `render`
+
+  - How to define `propTypes`, `defaultProps`, `contextTypes`, etc...
+
+    ```jsx
+    import React, { PropTypes } from 'react';
+
+    const propTypes = {
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+      text: PropTypes.string,
+    };
+
+    const defaultProps = {
+      text: 'Hello World',
+    };
+
+    class Link extends React.Component {
+      static methodsAreOk() {
+        return true;
+      }
+
+      render() {
+        return <a href={this.props.url} data-id={this.props.id}>{this.props.text}</a>
+      }
+    }
+
+    Link.propTypes = propTypes;
+    Link.defaultProps = defaultProps;
+
+    export default Link;
+    ```
+
+  - Ordering for `React.createClass`: eslint: [`react/sort-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md)
+
+  1. `displayName`
+  1. `propTypes`
+  1. `contextTypes`
+  1. `childContextTypes`
+  1. `mixins`
+  1. `statics`
+  1. `defaultProps`
+  1. `getDefaultProps`
+  1. `getInitialState`
+  1. `getChildContext`
+  1. `componentWillMount`
+  1. `componentDidMount`
+  1. `componentWillReceiveProps`
+  1. `shouldComponentUpdate`
+  1. `componentWillUpdate`
+  1. `componentDidUpdate`
+  1. `componentWillUnmount`
+  1. *clickHandlers or eventHandlers* like `onClickSubmit()` or `onChangeDescription()`
+  1. *getter methods for `render`* like `getSelectReason()` or `getFooterContent()`
+  1. *Optional render methods* like `renderNavigation()` or `renderProfilePicture()`
+  1. `render`
+
+## `isMounted`
+
+  - Do not use `isMounted`. eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
+
+  > Why? [`isMounted` is an anti-pattern][anti-pattern], is not available when using ES6 classes, and is on its way to being officially deprecated.
+
+  [anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
