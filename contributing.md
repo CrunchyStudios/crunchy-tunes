@@ -3,6 +3,7 @@
 ## General Workflow
 
 1. Fork the repo
+1. Pull latest upstream changes from master
 1. Cut a namespaced feature branch from master
   - bug/...
   - feat/...
@@ -10,8 +11,8 @@
   - doc/...
   - refactor/...
 1. Make commits to your feature branch. Prefix each commit like so:
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
+  - (fix) [Fixes/Closes/Resolves] #[Issue Number] -
+  - (feat) Add a new feature
   - (refactor) ...
   - (cleanup) ...
   - (test) ...
@@ -138,6 +139,29 @@ else, just repeat again.
 
 Thanks for contributing!
 
+### Rebase upstream changes into your branch
+
+Once you are done making changes, you can begin the process of getting
+your code merged into the main repo. Step 1 is to rebase upstream
+changes to the master branch into yours by running this command
+from your branch:
+
+```bash
+git checkout master
+git fetch upstream
+git pull --rebase upstream master
+git checkout -b pull_request_branch_name upstream/pull_request_branch_name
+git merge master
+```
+If you get merge conflicts at this point, abort the process and tell the contributor to update their pull request by using 'git pull --rebase upstream master' into their feature branch and pushing their changes.
+
+If the merge succeeds without conflicts, finish merging the pull request:
+```
+git checkout master
+git merge pull_request_branch_name
+git push upstream master
+```
+
 ### Guidelines
 
 1. Uphold the current code standard:
@@ -160,7 +184,7 @@ This is just to help you organize your process
 - [ ] Did I rebase the upstream master branch after I finished all my
   work?
 - [ ] Did I write a clear pull request message detailing what changes I made?
-- [ ] Did I get a code review?
+- [ ] Did I get a team code review?
  - [ ] Did I make any requested changes from that code review?
 
 If you follow all of these guidelines and make good changes, you should have
