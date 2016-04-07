@@ -384,14 +384,14 @@ When writing any block of code that is logically subordinate to the line immedia
 *A mostly reasonable approach to React and JSX*
 
 
-## Basic Rules
+* Basic Rules
 
   - Only include one React component per file.
     - However, multiple [Stateless, or Pure, Components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) are allowed per file. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
   - Always use JSX syntax.
   - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
 
-## Class vs `React.createClass` vs stateless
+* Class vs `React.createClass` vs stateless
 
   - If you have internal state and/or refs, prefer `class extends React.Component` over `React.createClass` unless you have a very good reason to use mixins. eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
 
@@ -434,7 +434,7 @@ When writing any block of code that is logically subordinate to the line immedia
     }
     ```
 
-## Naming
+* Naming
 
   - **Extensions**: Use `.jsx` extension for React components.
   - **Filename**: Use PascalCase for filenames. E.g., `ReservationCard.jsx`.
@@ -467,7 +467,7 @@ When writing any block of code that is logically subordinate to the line immedia
     import Footer from './Footer';
     ```
 
-## Declaration
+* Declaration
 
   - Do not use `displayName` for naming components. Instead, name the component by reference.
 
@@ -483,7 +483,7 @@ When writing any block of code that is logically subordinate to the line immedia
     }
     ```
 
-## Alignment
+* Alignment
 
   - Follow these alignment styles for JSX syntax. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
@@ -510,7 +510,7 @@ When writing any block of code that is logically subordinate to the line immedia
     </Foo>
     ```
 
-## Quotes
+* Quotes
 
   - Always use double quotes (`"`) for JSX attributes, but single quotes for all other JS. eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
 
@@ -531,7 +531,7 @@ When writing any block of code that is logically subordinate to the line immedia
     <Foo style={{ left: '20px' }} />
     ```
 
-## Spacing
+* Spacing
 
   - Always include a single space in your self-closing tag.
 
@@ -550,7 +550,7 @@ When writing any block of code that is logically subordinate to the line immedia
     <Foo />
     ```
 
-## Props
+* Props
 
   - Always use camelCase for prop names.
 
@@ -635,7 +635,7 @@ When writing any block of code that is logically subordinate to the line immedia
   <div />
   ```
 
-## Parentheses
+* Parentheses
 
   - Wrap JSX tags in parentheses when they span more than one line. eslint: [`react/wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md)
 
@@ -663,7 +663,7 @@ When writing any block of code that is logically subordinate to the line immedia
     }
     ```
 
-## Tags
+* Tags
 
   - Always self-close tags that have no children. eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
 
@@ -690,7 +690,7 @@ When writing any block of code that is logically subordinate to the line immedia
     />
     ```
 
-## Methods
+* Methods
 
   - Use arrow functions to close over local variables.
 
@@ -779,7 +779,7 @@ When writing any block of code that is logically subordinate to the line immedia
     }
     ```
 
-## Ordering
+* Ordering
 
   - Ordering for `class extends React.Component`:
 
@@ -853,7 +853,7 @@ When writing any block of code that is logically subordinate to the line immedia
   1. *Optional render methods* like `renderNavigation()` or `renderProfilePicture()`
   1. `render`
 
-## `isMounted`
+* `isMounted`
 
   - Do not use `isMounted`. eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
 
