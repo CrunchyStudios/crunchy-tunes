@@ -379,25 +379,10 @@ When writing any block of code that is logically subordinate to the line immedia
     <script src="a.js" type="text/javascript"></script>
 
 
-    # Airbnb React/JSX Style Guide
+    # React/JSX
 
     *A mostly reasonable approach to React and JSX*
 
-    ## Table of Contents
-
-      1. [Basic Rules](#basic-rules)
-      1. [Class vs `React.createClass` vs stateless](#class-vs-reactcreateclass-vs-stateless)
-      1. [Naming](#naming)
-      1. [Declaration](#declaration)
-      1. [Alignment](#alignment)
-      1. [Quotes](#quotes)
-      1. [Spacing](#spacing)
-      1. [Props](#props)
-      1. [Parentheses](#parentheses)
-      1. [Tags](#tags)
-      1. [Methods](#methods)
-      1. [Ordering](#ordering)
-      1. [`isMounted`](#ismounted)
 
     ## Basic Rules
 
@@ -876,4 +861,4 @@ When writing any block of code that is logically subordinate to the line immedia
 
       [anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
 
-    **[⬆ back to top](#table-of-contents)**
+    **[⬆ back to top](#table-of-contents)*
