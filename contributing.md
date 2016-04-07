@@ -17,7 +17,7 @@
   - (test) ...
   - (doc) ...
 1. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
-   directly to master. Include a description of your changes.
+   directly to master. Include a description of your changes, and noting which task it completes in waffle.io (e.g. Closes #2 - Completes contributing.md).
 1. Your pull request will be reviewed by another maintainer. The point of code
    reviews is to help keep the codebase clean and of high quality and, equally
    as important, to help you grow as a programmer. If your code reviewer
@@ -124,7 +124,7 @@ you get here again and nothing is broken and all the tests pass.
 
 Make a clear pull request from your fork and branch to the upstream master
 branch, detailing exactly what changes you made and what feature this
-should add. The clearer your pull request is the faster you can get
+should add. Also, if part of the original contributing team, include which waffle.io task this pull request maps to (e.g. Closes #2 -  Completes contributing.md).  The clearer your pull request is the faster you can get
 your changes incorporated into this repo.
 
 At least one other person MUST give your changes a code review, and once
