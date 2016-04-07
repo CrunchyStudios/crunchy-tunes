@@ -1,12 +1,7 @@
-# Crunchy JavaScript Style Guide() {
+# Crunchy JavaScript Style Guide
 
 *A mostly reasonable approach to JavaScript*
 
-Other Style Guides
- - [ES5](es5/)
- - [React](react/)
- - [CSS & Sass](https://github.com/crunchy/css)
- - [Ruby](https://github.com/crunchy/ruby)
 
 ## Table of Contents
 
