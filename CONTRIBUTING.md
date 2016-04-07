@@ -31,10 +31,17 @@
 
 ### Fork the repo
 
-Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
+Use github’s interface to make a fork of the repo, clone it to your local machine, then add that repo as an upstream remote:
 
 ```
+git clone https://github.com/<YOURG_GITHUB_NAME>/<NAME_OF_REPO>.git
+cd <NAME_OF_REPO>
 git remote add upstream https://github.com/hackreactor-labs/<NAME_OF_REPO>.git
+```
+
+Make sure your have the latest changes from upstream master in your local master branch.
+```
+git pull --rebase upstream master
 ```
 
 ### Cut a namespaced feature branch from master
@@ -122,6 +129,9 @@ If rebasing broke anything, fix it, then repeat the above process until
 you get here again and nothing is broken and all the tests pass.
 
 ### Make a pull request
+
+Push the changes on your local feature branch to a new branch on your fork:
+`git push -u origin <feature_branch_name>`
 
 Make a clear pull request from your fork and branch to the upstream master
 branch, detailing exactly what changes you made and what feature this
