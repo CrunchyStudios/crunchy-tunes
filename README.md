@@ -35,7 +35,9 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
-npm install -g webpack 
+npm install -g webpack
+npm install -g karma-cli
+npm install -g jasmine 
 
 ## Server your files on a webpack server (with hotloading!):
 
