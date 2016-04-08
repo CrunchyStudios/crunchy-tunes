@@ -1,0 +1,33 @@
+{
+  "name": "CrunchyTunesBoilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate repo for React/Webpack/Babel app",
+  "main": "./client/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --inline --hot --content-base client/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/immaculatehangover/CrunchyTunesBoilerplate.git"
+  },
+  "author": "Crunchy Tunes LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/immaculatehangover/reactBoilerplate/issues"
+  },
+  "homepage": "https://github.com/immaculatehangover/reactBoilerplate#readme",
+  "dependencies": {
+    "babel": "^6.1.18",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.14.0"
+  }
+}
