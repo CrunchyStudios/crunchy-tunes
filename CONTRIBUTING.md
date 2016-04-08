@@ -130,6 +130,8 @@ you get here again and nothing is broken and all the tests pass.
 
 ### Make a pull request
 
+Before you make your first pull request on this feature branch, follow the instructions [here](https://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one/) to squash your commits into a single informative commit. ONLY DO THIS IF YOU HAVE NOT YET SUBMITTED A PULL REQUEST.
+
 Push the changes on your local feature branch to a new branch on your fork:
 `git push -u origin <feature_branch_name>`
 
