@@ -4,8 +4,11 @@
   "description": "Boilerplate repo for React/Webpack/Babel app",
   "main": "./client/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server -d --inline --hot --content-base client/"
+    "test": "karma start",
+    "dev-start": "webpack -d && node server/server.js & webpack --watch",
+    "prod-start": "webpack && PORT=80 forever start server/server.js",
+    "aws-deploy": "aws deploy create-deployment --application-name crunchy-tunes --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name crunchy-tunes-dep-group --s3-location bucket=crunchytunes,bundleType=zip,key=crunchy-tunes.zip",
+    "aws-push": "aws deploy push --application-name crunchy-tunes --description --ignore-hidden-files --s3-location s3://crunchytunes/crunchy-tunes.zip --source ."
   },
   "repository": {
     "type": "git",
@@ -38,7 +41,6 @@
     "karma-jasmine": "^0.3.8",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
-    "react-addons-test-utils": "^15.0.0",
-    "webpack-dev-server": "^1.14.0"
+    "react-addons-test-utils": "^15.0.0"
   }
 }
