@@ -3,7 +3,9 @@
 import React from 'react';
 import App from './app.jsx';
 import { render } from 'react-dom';
-import requestUtils from './requestUtils.jsx'
+import searchYouTubeVideos from './requestYouTubeUtils.jsx'
+import searchSpotifyVideos from './requestSpotifyUtils.jsx'
+
 
 render (
   <App />,
