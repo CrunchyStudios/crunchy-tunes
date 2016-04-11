@@ -28,6 +28,12 @@ module.exports = {
     filename: 'bundle.js',
   },
 
+  externals: {
+        // require("jquery") is external and available
+        //  on the global var jQuery
+        "jquery": "jQuery"
+  },
+
   // `module` is an object with options for how Webpack processes the files it loads
   // when it scans a `require` statement. 99% of the time, `loaders` will be the only
   // thing you specify inside of `module`.
