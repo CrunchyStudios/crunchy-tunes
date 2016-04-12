@@ -1,4 +1,3 @@
-import apiKeys from './apiKeys.jsx';
 var $ = require("jquery");
 var Promise = require('bluebird');
 
@@ -8,7 +7,7 @@ var searchYouTube = ({query}) => {
   return new Promise(function(resolve, reject){
     $.get('https://www.googleapis.com/youtube/v3/search', {
       part: 'snippet',
-      key: apiKeys.youTubeKey,
+      key: process.env.YOUTUBE_KEY,
       q: query,
       maxResults: 50,
       type: 'video',
@@ -23,6 +22,8 @@ var searchYouTube = ({query}) => {
     });
   });
 };
+
+
 
 
 export default searchYouTube;

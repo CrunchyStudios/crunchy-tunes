@@ -21,6 +21,7 @@ var searchSpotify = ({query}) => {
 };
 
 
+
 export default searchSpotify;
 
 

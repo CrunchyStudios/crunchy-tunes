@@ -1,4 +1,3 @@
-import apiKeys from './apiKeys.jsx';
 var Promise = require('bluebird');
 var SC = require('soundcloud')
 // Returns media link and static content (thumbnails, artist, title):
@@ -6,7 +5,7 @@ var SC = require('soundcloud')
   
 // initialize SC session with client_id  
 SC.initialize({
-    client_id: apiKeys.soundCloudId
+    client_id: process.env.SOUNDCLOUD_ID
 });
 
 var searchSoundCloud = ({query}) => {
