@@ -22,7 +22,6 @@ var searchYouTube = ({query}, callback) => {
   });
 };
 
-searchYouTube({query: 'kanye'})
 
 export default searchYouTube;
 
