@@ -1,4 +1,4 @@
-import youTubeKey from './apiKeys.jsx';
+import apiKeys from './apiKeys.jsx';
 var $ = require("jquery");
 var Promise = require('bluebird');
 
@@ -8,8 +8,9 @@ var searchYouTube = ({query}) => {
   return new Promise(function(resolve, reject){
     $.get('https://www.googleapis.com/youtube/v3/search', {
       part: 'snippet',
-      key: youTubeKey,
+      key: apiKeys.youTubeKey,
       q: query,
+      maxResults: 50,
       type: 'video',
       videoEmbeddable: 'true'
     })
