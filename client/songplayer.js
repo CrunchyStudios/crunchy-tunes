@@ -3,7 +3,7 @@ import React from 'react';
 var SongPlayer = () => (
 
   <div>
-    Please Wait for improvements
+    <div>Check Back Soon for Improvements</div>
     </div>
 );
 

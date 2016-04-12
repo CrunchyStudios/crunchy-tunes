@@ -17,6 +17,7 @@ class Search extends React.Component {
   render() {
     return (
     <div className="search-bar form-inline">
+      <form> 
       <input 
         className="form-control"
         type="text"
@@ -24,6 +25,9 @@ class Search extends React.Component {
         //this will allow us to implement instant search
           //every time the field changes, the search results update
           />
+          <button type="submit">Search</button>
+
+          </form>
     </div>
   )
   }
