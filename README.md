@@ -51,6 +51,10 @@ Then go to localhost: 8080.
 ## Re-process and re-bundle your files whenever you make a change
 
 'webpack --watch'
+
+## API Keys
+Note: API Keys are stored as environment variables in TravisCI
+
 ```
 
 
