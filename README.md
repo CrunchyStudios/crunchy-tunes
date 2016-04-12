@@ -46,6 +46,12 @@ This script uses web pack to bundle your js and jsx files (with source maps), wa
 Navigate your browser to localhost: 8080 to view the app.
 
 
+
+'webpack --watch'
+
+## API Keys
+Note: API Keys are stored as environment variables in TravisCI
+
 ```
 
 ### Current Build Health [![Build Status](https://travis-ci.org/ImmaculateHangover/crunchy-tunes.svg?branch=master)](https://travis-ci.org/ImmaculateHangover/crunchy-tunes)
