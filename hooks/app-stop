@@ -1,0 +1,3 @@
+#!/bin/bash
+forever stopall
+rm -f /home/ec2-user/crunchy-tunes/client/dist/bundle.js

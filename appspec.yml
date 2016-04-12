@@ -1,0 +1,26 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/crunchy-tunes
+hooks:
+  BeforeInstall:
+    - location: hooks/before-install
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: hooks/after-install
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: hooks/app-start
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: hooks/app-stop
+      timeout: 300
+      runas: root
+  ValidateService:
+     - location: hooks/app-validate
+       timeout: 300
+       runas: root
