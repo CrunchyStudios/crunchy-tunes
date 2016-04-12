@@ -4,7 +4,7 @@ webpackConfig.entry = {};
 
 module.exports = function (config) {
   config.set({
-    browsers: [ 'Chrome' ], //run in Chrome
+    browsers: [process.env.TRAVIS ? 'Firefox' : 'Chrome'], //run in Firefox for Travis CI, otherwise use Chrome.
     singleRun: true, //just run once by default
     frameworks: [ 'jasmine' ], //use the jasmine test framework
     files: [

@@ -3,7 +3,6 @@
 /usr/local/bin/npm install -g webpack
 /usr/local/bin/npm install -g karma-cli
 /usr/local/bin/npm install -g jasmine
-/usr/local/bin/npm install -g webpack-dev-server
 /usr/local/bin/npm install -g forever
 
 cd /home/ec2-user/crunchy-tunes

@@ -1,5 +1,5 @@
 import React from 'react';
-import SongPlayer from '../songPlayer.js';
+import SongPlayer from '../songplayer.js';
 import TestUtils from 'react-addons-test-utils';
 
 describe('SongPlayer', function() {
