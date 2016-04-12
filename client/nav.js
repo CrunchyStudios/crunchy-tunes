@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './search.js'
+import Search from './search.jsx'
 
 var Nav = () => (
   
