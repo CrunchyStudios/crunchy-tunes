@@ -63,13 +63,11 @@ git checkout -b `your-branch-name`
 
 ### Make commits to your feature branch. 
 
-Prefix each commit like so
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
+Structure each commit like so
+  - <Resolves, Fixes, Closes> <Issue #> -
+  - <feat/doc/test/bug/refactor> /
+  - <Concise but complete description of functionality in imperative tense (i.e. add NOT added)>
+
 
 Make changes and commits on your branch, and make sure that you
 only make changes that are relevant to this branch. If you find
@@ -130,15 +128,16 @@ you get here again and nothing is broken and all the tests pass.
 
 ### Make a pull request
 
-Before you make your first pull request on this feature branch, follow the instructions [here](https://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one/) to squash your commits into a single informative commit. ONLY DO THIS IF YOU HAVE NOT YET SUBMITTED A PULL REQUEST.
+Before you make your first pull request on this feature branch, squash your commits into concise informative commits which follow the guidelines described above (should usually just result in one commit). ONLY DO THIS IF YOU HAVE NOT YET SUBMITTED A PULL REQUEST.
 
 Push the changes on your local feature branch to a new branch on your fork:
 `git push -u origin <feature_branch_name>`
 
 Make a clear pull request from your fork and branch to the upstream master
 branch, detailing exactly what changes you made and what feature this
-should add. Also, if part of the original contributing team, include which waffle.io task this pull request maps to (e.g. Closes #2 -  Completes contributing.md).  The clearer your pull request is the faster you can get
-your changes incorporated into this repo.
+should add. Also, if part of the original contributing team, include which waffle.io task this pull request maps to (e.g. Closes #2 -  Completes contributing.md). The clearer your pull request is the faster you can get your changes incorporated into this repo. All pull requests by the contributing team should have an issue associated with them.
+
+Fill out the [template][#Template] and attach to the issue associated with your pull request.
 
 At least one other person MUST give your changes a code review, and once
 they are satisfied they will merge your changes into upstream. Alternatively,
@@ -153,7 +152,7 @@ Thanks for contributing!
 
 ### Merging a pull request
 
-Only merge a pull request after it has been reviewed during team code reviews. DO NOT merge your own pull request... EVER. Check that a pull request complies with all the guidelines above before merging. 
+Only merge a pull request after it has passed code reviews. DO NOT merge your own pull request... EVER. Check that a pull request complies with all the guidelines above before merging. 
 
 GitHub by default merges pull request using the --no-ff option (no fast forward merge), which created superfluous merge commits in the repo history. This is not desirable.
 
@@ -162,7 +161,12 @@ Instead use the following manual instructions to merge a pull request (assumes t
 ```bash
 git checkout -b [contributors_username]-[pull_request_branch_name]
 git pull [contributors_fork_url] [pull_request_branch_name]
+```
+Manually verify functionality described in the pull request template. Verify that all tests are passing by running `npm test` or checking the pull request's [build status](https://travis-ci.org/ImmaculateHangover/crunchy-tunes/pull_requests).
 
+Only proceed with next steps if all tests are passing and functionality has been manually verified as working. Otherwise send instructions to the contributor on how to modify their pull request.
+
+```
 git checkout master
 git pull --rebase upstream master
 git merge [contributors_username]-[pull_request_branch_name]
@@ -171,34 +175,43 @@ If you get merge conflicts at this point, abort the process and tell the contrib
 
 If the merge succeeds without conflicts, finish merging the pull request by typing `git push upstream master`
 
+###Deployment
+Builds in master that pass all tests will automatically be deployed to [http://crunchytunes.com](http://crunchytunes.com) via Travis CI and AWS CodeDeploy. See the build history [here](https://travis-ci.org/ImmaculateHangover/crunchy-tunes/builds).
+
 ### Guidelines
 
 1. Uphold the current code standard:
-    - Keep your code [DRY][].
-    - Apply the [boy scout rule][].
+    - Keep your code DRY.
     - Follow [STYLE-GUIDE.md](STYLE-GUIDE.md)
-1. Run the [tests][] before submitting a pull request.
+1. Pass all tests before submitting a pull request.
 1. Tests are very, very important. Submit tests if your pull request contains
    new, testable behavior.
-1. Your pull request is comprised of a single ([squashed][]) commit.
+1. Your pull request is comprised of a single squashed commit.
 
-## Checklist:
+### Template
 
-This is just to help you organize your process
+Complete the template below and paste into the issue associated with your Pull Request.
 
+#### Checklist
+Mark an X inside of 
 - [ ] Did I cut my work branch off of master (don't cut new branches from existing feature brances)?
 - [ ] Did I follow the correct naming convention for my branch?
 - [ ] Is my branch focused on a single main change?
- - [ ] Do all of my changes directly relate to this change?
-- [ ] Did I rebase the upstream master branch after I finished all my
-  work?
+- [ ] Do all of my changes directly relate to this change?
+- [ ] Did I rebase the upstream master branch after I finished all my work?
 - [ ] Did I write a clear pull request message detailing what changes I made?
-- [ ] Did I get a team code review?
- - [ ] Did I make any requested changes from that code review?
+- [ ] Are all tests passing
+- [ ] Did I write new tests for new functionality?
 
-If you follow all of these guidelines and make good changes, you should have
-no problem getting your changes merged in.
+#### What are the important parts of the code?
 
+#### How should this be tested by the reviewer?
+
+#### Is any other information necessary to understand the files?
+
+#### Attach relevant screenshots (if any)
+
+Your reviewer will use this template to validate your pull requests and get your contribution merged in!
 
 <!-- Links -->
 [style guide]: https://github.com/hackreactor-labs/style-guide

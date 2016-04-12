@@ -19,11 +19,11 @@ A music player and aggregator built on the Spotify, YouTube and Soundcloud APIs.
 
 ## Usage
 
-TBD
+Checkout the app in action [here](http://crunchytunes.com)!
 
 ## Requirements
 
-TBD
+Node v5.8
 
 ## Development
 
@@ -32,27 +32,24 @@ TBD
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 npm install -g webpack
 npm install -g karma-cli
 npm install -g jasmine 
 
-## Server your files on a webpack server (with hotloading!):
+## Server your files on a webpack server:
 
-'npm start'
-Then go to localhost: 8080.
+'npm run dev-start'
 
-## Process and bundle your files:
+This script uses web pack to bundle your js and jsx files (with source maps), watches the files for changes to trigger a new bundle, and starts your node server on localhost:8080.
 
-'webpack'
+Navigate your browser to localhost: 8080 to view the app.
 
-## Re-process and re-bundle your files whenever you make a change
 
-'webpack --watch'
 ```
 
+### Current Build Health [![Build Status](https://travis-ci.org/ImmaculateHangover/crunchy-tunes.svg?branch=master)](https://travis-ci.org/ImmaculateHangover/crunchy-tunes)
+View the build [history]](https://travis-ci.org/ImmaculateHangover/crunchy-tunes/builds)
 
 ### Roadmap
 
