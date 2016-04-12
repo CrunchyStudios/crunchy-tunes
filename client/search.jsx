@@ -13,10 +13,10 @@ class Search extends React.Component {
 
   }
 
-
   render() {
     return (
     <div className="search-bar form-inline">
+      <span> Search YouTube, SoundCloud and Spotify!</span>
       <form> 
       <input 
         className="form-control"
@@ -29,10 +29,8 @@ class Search extends React.Component {
 
           </form>
     </div>
-  )
+    )
   }
-
-
 }
 
 export default Search;

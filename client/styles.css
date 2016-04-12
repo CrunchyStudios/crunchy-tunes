@@ -1,0 +1,9 @@
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.navBar {
+  padding-top: 15px;
+}

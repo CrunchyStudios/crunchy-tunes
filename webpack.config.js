@@ -1,4 +1,8 @@
 // webpack.config.js exports a configuration object in the CommonJS pattern.
+const webpack = require('webpack');
+
+const autoprefixer = require('autoprefixer');
+
 module.exports = {
 
   // `entry` gives a path to the file that is the "root" of the dependency
@@ -44,7 +48,7 @@ module.exports = {
         // `test` is a test condition that causes the loader to be applied when a
         // filename passes. In this case, when any filename contains either `.js` or `.jsx`
         // as its terminating characters, this loader will be applied.
-        test: /\.jsx?$/,
+        test: /\.jsx?$/, 
 
         // `exclude` lets you specify tests that, when passed by a filename, cause those
         // files to *not* be transformed by the loader. There's also an `include` option
@@ -71,9 +75,32 @@ module.exports = {
           presets: ['react', 'es2015'],
         }
       },
-      
-      {test: /\.jsx?$/, loader: "eslint-loader", exclude: /node_modules/}
+
+      {
+        test: /\.jsx?$/, 
+        loader: "eslint-loader", 
+        exclude: /node_modules/
+      },
+
+      {
+        test: /\.(scss|css)$/,
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass'
+      },
     ]
-  }
+  },
+  resolve: {
+      extensions: ['', '.scss', '.js', '.json'],
+      packageMains: ['browser', 'web', 'browserify', 'main', 'style']
+    },
+    watch: true,
+    postcss: [autoprefixer],
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('test')
+      })
+    ]
+
+
+
 
 };
