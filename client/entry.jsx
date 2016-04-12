@@ -3,8 +3,8 @@
 import React from 'react';
 import App from './app.jsx';
 import { render } from 'react-dom';
-import searchYouTubeVideos from './requestYouTubeUtils.jsx'
-import searchSpotifyVideos from './requestSpotifyUtils.jsx'
+import searchYouTube from './requestYouTubeUtils.jsx'
+import searchSpotify from './requestSpotifyUtils.jsx'
 
 
 render (

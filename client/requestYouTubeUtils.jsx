@@ -1,9 +1,9 @@
 import youTubeKey from './apiKeys.jsx';
 var $ = require("jquery");
 
-// Returns media and static content (thumbnails, artist, title):
+// Returns media link and static content (thumbnails, artist, title):
 
-var searchYouTubeVideos = ({query}, callback) => {
+var searchYouTube = ({query}, callback) => {
   $.get('https://www.googleapis.com/youtube/v3/search', {
     part: 'snippet',
     key: youTubeKey,
@@ -17,14 +17,13 @@ var searchYouTubeVideos = ({query}, callback) => {
   	}
    }
   )
-  .fail(({responseJSON}) => {
-    responseJSON.error.errors.forEach((err) =>
-      console.error(err)
-    )
+  .fail((err) => {
+    console.log(err);
   });
 };
 
+searchYouTube({query: 'kanye'})
 
-export default searchYouTubeVideos;
+export default searchYouTube;
 
 
