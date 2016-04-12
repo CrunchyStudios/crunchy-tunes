@@ -11,10 +11,12 @@ var searchYouTube = ({query}, callback) => {
     type: 'video',
     videoEmbeddable: 'true'
   })
-  .done(({items}) => {
-  	if (callback) {
-  	  callback(items);
-  	}
+  .done((result) => {
+    if (callback) {
+      // run callback on array of songs
+      callback(result.items);
+    }
+    return result.items;
    }
   )
   .fail((err) => {

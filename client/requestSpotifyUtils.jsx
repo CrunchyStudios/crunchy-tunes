@@ -5,13 +5,14 @@ var $ = require("jquery");
 var searchSpotify = ({query}, callback) => {
   $.get('https://api.spotify.com/v1/search', {
     q: query, 
-    type:'track,artist,album'}
+    type:'track'}
     )
   .done((items) => {
   	if (callback) {
-  	  callback(items);
+      // run callback on array of songs
+  	  callback(items.tracks.items);
   	}
-    console.log(items);
+    return items.tracks.items;
    }
   )
   .fail((err) => {
@@ -20,7 +21,6 @@ var searchSpotify = ({query}, callback) => {
 
 };
 
-searchSpotify({query: 'kanye'})
 
 export default searchSpotify;
 
