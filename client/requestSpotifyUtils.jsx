@@ -1,24 +1,21 @@
-var $ = require("jquery");
-
+var $ = require('jquery');
+var Promise = require('bluebird');
 // Returns media link and static content (thumbnails, artist, title):
 
-var searchSpotify = ({query}, callback) => {
-  $.get('https://api.spotify.com/v1/search', {
-    q: query, 
-    type:'track'}
-    )
-  .done((result) => {
-  	if (callback) {
-      // run callback on array of songs
-  	  callback(result.tracks.items);
-  	}
-    return result.tracks.items;
-   }
-  )
-  .fail((err) => {
-    console.log(err)
+var searchSpotify = ({query}) => {
+  return new Promise(function(resolve, reject){
+    $.get('https://api.spotify.com/v1/search', {
+      q: query, 
+      type:'track'}
+      )
+    .done((result) => {
+      // resolve only the array of song objects
+    	  resolve(result.tracks.items);
+    	})
+    .fail((err) => {
+      reject(err);
+    });
   });
-
 };
 
 
