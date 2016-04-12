@@ -7,12 +7,12 @@ var searchSpotify = ({query}, callback) => {
     q: query, 
     type:'track'}
     )
-  .done((items) => {
+  .done((result) => {
   	if (callback) {
       // run callback on array of songs
-  	  callback(items.tracks.items);
+  	  callback(result.tracks.items);
   	}
-    return items.tracks.items;
+    return result.tracks.items;
    }
   )
   .fail((err) => {

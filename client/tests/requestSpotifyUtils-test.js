@@ -10,9 +10,9 @@ describe('Spotify search API request', function () {
     var query = {query: 'kanye west'};
     // due to async get request, need to pass in special Jasmine callback done
     beforeEach(function(done) {
-        searchSpotify(query, function(result) {
+        searchSpotify(query, function(arrayOfSongs) {
             // set return to the array of song results
-            returned = result;
+            returned = arrayOfSongs;
             // special callback invocation
             done();
         })
