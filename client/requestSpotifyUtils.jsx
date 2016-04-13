@@ -11,14 +11,25 @@ var searchSpotify = ({query}) => {
       )
     .done((result) => {
       // resolve only the array of song objects
-    	  resolve(result.tracks.items);
-        
-    	})
-    .fail((err) => {
-      reject(err);
-    });
+    	  // resolve(result.tracks.items);
+      var arrayOfSongs = result.tracks.items
+      // add source tag before returning promise
+      var mapResult = arrayOfSongs.map(function(songObj) {
+        songObj.apiSource = 'Spotify';
+        return songObj
+      });
+      resolve(mapResult)
+    })
+    .fail(function(err){
+      throw err;
+    })
+    // .fail((err) => {
+    //   reject(err);
+    // });
   });
 };
+
+
 
 
 
