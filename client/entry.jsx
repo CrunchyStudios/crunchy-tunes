@@ -7,6 +7,7 @@ import searchYouTube from './requestYouTubeUtils.jsx'
 import searchSpotify from './requestSpotifyUtils.jsx'
 import searchSoundCloud from './requestSoundCloudUtils.jsx'
 import queryAll from './queryAll.jsx'
+import cardCreator from './songCardCreator.jsx';
 
 render (
   <App />,

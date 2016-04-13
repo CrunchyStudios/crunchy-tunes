@@ -1,47 +1,37 @@
-var imagePath = {
-	Spotify: 'album[images[0]][url]',
-	SoundCloud: '.artwork_url',
-	YouTube: '.snippet.thumbnails.high.url'
-}
-
-var contentId = {
-	Spotify: '',
-	SoundCloud: ,
-	YouTube: 'https://www.youtube.com/embed/' + 
-}
-
-var creator = {
-	Spotify: ,
-	SoundCloud: ,
-	YouTube: 
-}
-
-var songTitle = {
-	Spotify: ,
-	SoundCloud: ,
-	YouTube: 
-}
-
-var source = {
-	Spotify: ,
-	SoundCloud: ,
-	YouTube: 
-}
-
-// function
-var cardCreator = function (object) {
-
-	// input is an object with apiSource defined
-
-	// we check apiSource and use that as key
-	var key = object.apiSource;
-	// populate new object, returning values based on apiSource
-	var newCard = {
-		imagePath: object[imagePath[key]]
-	}
-	// return new object
-	return newCard
-
+var cardCreator = (object) => {
 	
+	var key = object.apiSource;
+
+	if (key === 'Spotify') {
+		return  {
+			imagePath: object.album.images[0].url,
+			contentId: object.id,
+			creator: object.artists[0].name,
+			songTitle: object.name,
+			apiSource: object.apiSource
+		}
+	}
+	
+	if (key === 'SoundCloud') {
+		return {
+			imagePath: object.artwork_url,
+			contentId: object.id,
+			creator: object.user.username,
+			songTitle: object.title,
+			apiSource: object.apiSource
+		}
+	}
+
+	if (key === 'YouTube') {
+		return {
+			imagePath: object.snippet.thumbnails.high.url,
+			contentId: object.id.videoId,
+			creator: object.snippet.channelTitle,
+			songTitle: object.snippet.title,
+			apiSource: object.apiSource
+		}
+	}
+
 }
 
+export default cardCreator;

@@ -20,12 +20,9 @@ var searchSpotify = ({query}) => {
       });
       resolve(mapResult)
     })
-    .fail(function(err){
-      throw err;
-    })
-    // .fail((err) => {
-    //   reject(err);
-    // });
+    .fail((err) => {
+      reject(err);
+    });
   });
 };
 
