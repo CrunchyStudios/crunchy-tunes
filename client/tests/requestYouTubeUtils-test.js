@@ -1,7 +1,7 @@
 // test for YouTube API
 import React from 'react';
 import TestUtils from 'react-addons-test-utils'; //Alternately could use the DOM API
-import searchYouTube from '../requestYouTubeUtils.jsx';
+import searchYouTube from '../requestYouTubeUtils.js';
 
 
 describe('YouTube search API request', function () {
@@ -18,6 +18,8 @@ describe('YouTube search API request', function () {
     	    })
             .catch(function(err){
                 throw(err);
+                // special callback invocation
+                done();
             })
     });
 

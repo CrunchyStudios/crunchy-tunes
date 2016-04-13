@@ -49,8 +49,6 @@ Navigate your browser to localhost: 8080 to view the app.
 
 'webpack --watch'
 
-## API Keys
-Note: API Keys are stored as environment variables in TravisCI
 
 ```
 

@@ -1,7 +1,7 @@
 // test for SoundCloud API
 import React from 'react';
 import TestUtils from 'react-addons-test-utils'; //Alternately could use the DOM API
-import searchSoundCloud from '../requestSoundCloudUtils.jsx';
+import searchSoundCloud from '../requestSoundCloudUtils.js';
 
 
 
@@ -19,6 +19,8 @@ describe('SoundCloud search API request', function () {
             })
             .catch(function(err){
                 throw err;
+                // special callback invocation
+                done();
             });
     });
 

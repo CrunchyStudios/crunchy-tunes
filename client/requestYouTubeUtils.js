@@ -1,3 +1,5 @@
+import keys from '../config/keys.js';
+
 var $ = require("jquery");
 var Promise = require('bluebird');
 
@@ -7,7 +9,7 @@ var searchYouTube = ({query}) => {
   return new Promise(function(resolve, reject){
     $.get('https://www.googleapis.com/youtube/v3/search', {
       part: 'snippet',
-      key: 'AIzaSyDmx467d1QuKT6XYvFVk6wbYCy06mmyVlY',
+      key: process.env.SOUNDCLOUD_ID || keys.youTube,
       q: query,
       maxResults: 50,
       type: 'video',

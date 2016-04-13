@@ -1,3 +1,5 @@
+import keys from '../config/keys.js';
+
 var Promise = require('bluebird');
 var SC = require('soundcloud')
 // Returns media link and static content (thumbnails, artist, title):
@@ -8,7 +10,7 @@ var searchSoundCloud = ({query}) => {
  return new Promise(function(resolve, reject){
 // initialize SC session with client_id  
 SC.initialize({
-    client_id: '7182630dc6a6fc8aa606657648545826'
+    client_id: process.env.SOUNDCLOUD_ID || keys.soundCloud
 });
 
   SC.get('/tracks', { 

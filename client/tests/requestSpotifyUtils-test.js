@@ -1,7 +1,7 @@
 // test for Spotify API
 import React from 'react';
 import TestUtils from 'react-addons-test-utils'; //Alternately could use the DOM API
-import searchSpotify from '../requestSpotifyUtils.jsx';
+import searchSpotify from '../requestSpotifyUtils.js';
 
 
 
@@ -19,6 +19,8 @@ describe('Spotify search API request', function () {
             })
             .catch(function(err){
                 throw err;
+                // special callback invocation
+                done();
             });
     });
 

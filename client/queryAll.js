@@ -1,12 +1,12 @@
 var Promise = require('bluebird');
-import searchSoundCloud from './requestSoundCloudUtils.jsx';
-import searchSpotify from './requestSpotifyUtils.jsx';
-import searchYouTube from './requestYouTubeUtils.jsx';
-import cardCreator from './songCardCreator.jsx';
-import remixArray from './remixArray.jsx';
+import searchSoundCloud from './requestSoundCloudUtils.js';
+import searchSpotify from './requestSpotifyUtils.js';
+import searchYouTube from './requestYouTubeUtils.js';
+import cardCreator from './songCardCreator.js';
+import remixArray from './remixArray.js';
 
 var queryAll = ({query}) => {
-	
+	return new Promise(function(resolve, reject){
   var queryEach = [searchSpotify({query}), searchSoundCloud({query}), searchYouTube({query})]
   // return promises from all three queries in a single array
 	Promise.all(queryEach)	
@@ -18,16 +18,15 @@ var queryAll = ({query}) => {
       remixed.forEach(function(song){
         cardsArray.push(cardCreator(song));
       })
-      return cardsArray;
+      resolve(cardsArray);
 		})
-    //sanity Check
-    .then(function(result){
-      //look a the cards
-      console.log(result);
+    .catch((err) => {
+      reject(err);
     })
-
+  });
 }
 
-queryAll({query: 'rihanna'})
+
+// queryAll({query: 'rihanna'})
 
 export default queryAll;

@@ -22,7 +22,7 @@ var searchSpotify = ({query}) => {
     })
     .fail((err) => {
       reject(err);
-    });
+    })
   });
 };
 
