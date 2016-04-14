@@ -22,6 +22,7 @@ coverage
 build/
 dist/
 client/dist/
+dpl_cd_upload/
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:

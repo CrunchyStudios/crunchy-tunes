@@ -1,6 +1,10 @@
 language: node_js
 node_js:
 - '5.8'
+before_install:
+- zip -r crunchy-tunes.zip .
+- mkdir -p dpl_cd_upload
+- mv crunchy-tunes.zip dpl_cd_upload/crunchy-tunes.zip
 before_script:
 - npm install -g webpack
 - npm install -g karma-cli
@@ -14,10 +18,12 @@ deploy:
   secret_access_key: &1
     secure: rJ0Rr3vHxi8qTFDIioSHSqCnsK80Kr8s+oZiWNjhxMzyRTXGCoePgqTfdFLvhyJ+yZj8Dsui9RV4aw6ZiXNWaZo3wcwRP9gRQWusuPBA3w86wv7GCIXuAAIYviX2ienj4J0hwhdBl8gCd4BJ4CFTmV9+CJA4jx1C+o48YJ9Ki7RW3MFfIh15JVWlJiAdj71/ZegZZAo+ChESFrbhcLAL6/QHhp04W0UDH15FCLsxRyr0gwSEOgrhsvDB3USnrpzbPjEU4WluMIzpNmew3uqH6d9icTLH97HL2k1gTU0S1gItNhJbYO8up6CriXDJ7qpKKRsO+fqjhxBz19sf1YKCvhlRSpG+1ZisyNwFndCKzRZmNc5fjom0lBWvqpMxBQMrqX132eA72ugXml65P6NOqJmU2l9ZHizCIUeGEw93+ry4l3z8l/NGsr1j5R5h4vlMu55521vci4li52hLiV6J04ItdmM+eo5bb3LCAWpqTLmXrrUlP86fhtQDYwioiz2/XA3P1oHqVHL4chQuZoLqnQWWDwWAJUvSMsTAhqb4SQB7rv4FLvx1fsFLzdsIZb7NAo+XJeyAvrXscs1M0V4Czf5G+gSbf7TnDYuKDoKBRYNHExhdpBF5yp7pLVFy2hscHZdAMuTjumFlOxDcvDgYtGVrn3SfNrgWLhWkG3tHhKI=
   local_dir: dpl_cd_upload
-  skip_cleanup: false
+  skip_cleanup: true
+  detect_encoding: true
   on: &2
     branch: feat/travis-aws-deploy
   bucket: crunchytunes
+  region: us-west-2
 - provider: codedeploy
   access_key_id: AKIAJZ7PHSPW2CQSKMSA
   secret_access_key: *1
@@ -26,8 +32,8 @@ deploy:
   bundle_type: zip
   application: crunchy-tunes
   deployment_group: crunchy-tunes-dep-group
-  wait-until-deploy: true
+  region: us-west-2
+  wait-until-deployed: true
   on: *2
-before_deploy:
-- mkdir -p dpl_cd_upload
-- mv crunchy-tunes.zip dpl_cd_upload/crunchy-tunes.zip
+after_deploy:
+- echo "Deploy Finished!"
