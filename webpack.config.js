@@ -71,6 +71,8 @@ module.exports = {
           presets: ['react', 'es2015'],
         }
       },
+      
+      {test: /\.jsx?$/, loader: "eslint-loader", exclude: /node_modules/}
     ]
   }
 
