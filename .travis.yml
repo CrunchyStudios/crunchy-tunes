@@ -16,14 +16,14 @@ deploy:
 - provider: s3
   access_key_id: AKIAJZ7PHSPW2CQSKMSA
   secret_access_key: &1
-    secure: rJ0Rr3vHxi8qTFDIioSHSqCnsK80Kr8s+oZiWNjhxMzyRTXGCoePgqTfdFLvhyJ+yZj8Dsui9RV4aw6ZiXNWaZo3wcwRP9gRQWusuPBA3w86wv7GCIXuAAIYviX2ienj4J0hwhdBl8gCd4BJ4CFTmV9+CJA4jx1C+o48YJ9Ki7RW3MFfIh15JVWlJiAdj71/ZegZZAo+ChESFrbhcLAL6/QHhp04W0UDH15FCLsxRyr0gwSEOgrhsvDB3USnrpzbPjEU4WluMIzpNmew3uqH6d9icTLH97HL2k1gTU0S1gItNhJbYO8up6CriXDJ7qpKKRsO+fqjhxBz19sf1YKCvhlRSpG+1ZisyNwFndCKzRZmNc5fjom0lBWvqpMxBQMrqX132eA72ugXml65P6NOqJmU2l9ZHizCIUeGEw93+ry4l3z8l/NGsr1j5R5h4vlMu55521vci4li52hLiV6J04ItdmM+eo5bb3LCAWpqTLmXrrUlP86fhtQDYwioiz2/XA3P1oHqVHL4chQuZoLqnQWWDwWAJUvSMsTAhqb4SQB7rv4FLvx1fsFLzdsIZb7NAo+XJeyAvrXscs1M0V4Czf5G+gSbf7TnDYuKDoKBRYNHExhdpBF5yp7pLVFy2hscHZdAMuTjumFlOxDcvDgYtGVrn3SfNrgWLhWkG3tHhKI=
+    secure: TdtNyVQNvmTej/qauFBHfy2mH5Eu7V4YV0jlEeZ1GgPTQ9BBkSbYsBaCIWqjb+QzskoT1kMGjQUX5XsLaKVV6tJKOtVQSoXWceBx47oEZ5fVhIxzqoDFHLUM1T+mgrH2xx+WZt0lt7C9c9WS+IDX+r3FU8hk4CV3ec/wxmAu/bFw2O4B79ohLPVLJDvn2wWqcKP2OWukUlMa2Om32C+TqfO753LHJzXqYsrMr11yey1Uq29BF48FMoSLm33Iqi0gkRXiHTUMoEOjnbfNN2ctdBEp2qbYl8ZGpgOTgOViTugjxIt6kelgbq1R2FRsZ8eF/N9kmNuYSoWVDUE6LB3GIwzfV/2JizXyZF14t0AkhDFCHk7+b/5BndGhW71D/9irlvz3RZZUHRAda1fdTU3ReXLgh3jU06zoKEvzm6zPNWEtbMOtNz4r+ci4ybitjZlXcZFN6Ffw5OQZ1H3urewmHTidejLK3Bafrv6hDiwxmKgYK7jcM1SSNUm/JkG3sywHVPSgigamoK6gifEabAgnTDp/39bgRlk7lwcBytA2Izes/zL2QkNvP1fbLNzt5ntxfd6jRr23/ZUx+u1Rr2d2SPVNbGTWQyMvi81axaByeTggHy7VzUI0lg7MeDRKibZmoHNJMivIQ9NJYFxvUmJi6XMkaZnplRwnXirmWDTw19U=
   local_dir: dpl_cd_upload
   skip_cleanup: true
-  detect_encoding: true
-  on: &2
-    branch: feat/travis-aws-deploy
-  bucket: crunchytunes
   region: us-west-2
+  on: &2
+    repo: ImmaculateHangover/crunchy-tunes
+    branch: master
+  bucket: crunchytunes
 - provider: codedeploy
   access_key_id: AKIAJZ7PHSPW2CQSKMSA
   secret_access_key: *1
@@ -33,7 +33,7 @@ deploy:
   application: crunchy-tunes
   deployment_group: crunchy-tunes-dep-group
   region: us-west-2
-  wait-until-deployed: true
+  wait_until_deployed: true
   on: *2
 after_deploy:
 - echo "Deploy Finished!"
