@@ -92,7 +92,6 @@ module.exports = {
       extensions: ['', '.scss', '.js', '.json'],
       packageMains: ['browser', 'web', 'browserify', 'main', 'style']
     },
-    watch: true,
     postcss: [autoprefixer],
     plugins: [
       new webpack.DefinePlugin({
