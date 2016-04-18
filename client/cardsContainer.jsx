@@ -3,38 +3,35 @@ import Button from 'react-toolbox/lib/button';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 
 
-var CardsContainer = ({tracks, handleCardPlay}) => {
-
-  var cards = tracks.map((track) =>
-    <Card key={track.id} className="card" style={{width: '300px'}}>
+const CardsContainer = ({ tracks, handleCardPlay }) => {
+  let cards = tracks.map((track) =>
+    <Card onClick={() => handleCardPlay(track)}
+      key={track.contentId}
+      className="card"
+      style={{ width: '250px', height: '370px' }}
+    >
         <CardTitle
-          avatar="http://www.iconarchive.com/download/i98446/dakirby309/simply-styled/Spotify.ico"
+          avatar=
+          { track.apiSource === 'Spotify' ? 'http://www.iconarchive.com/download/i98446/dakirby309/simply-styled/Spotify.ico' :
+              track.apiSource === 'SoundCloud' ? 'https://c1.staticflickr.com/9/8082/8292777643_65090144e9.jpg' :
+                'https://cdn0.iconfinder.com/data/icons/social-networks-and-media-flat-icons/136/Social_Media_Socialmedia_network_share_socialnetwork_network-30-512.png' }
           title={track.artist}
           // subtitle="Subtitle here"
         />
         <CardMedia
           aspectRatio="wide"
-          image={track.art}
-        />        
-        
+          image={track.imagePath}
+        />
         <CardText>
-        Any Description We Want!
+        {track.songTitle}
         </CardText>
-
-        <CardActions>
-          <Button label="Play" onClick={() => handleCardPlay(track)}/>
-          <Button label="Add To Library" />
-        </CardActions>
       </Card>
   );
-  
   return (
     <div className="cardsContainer">
-      {cards}    
+      {cards}
     </div>
   );
-
-  
 };
 
 export default CardsContainer;

@@ -41,14 +41,13 @@ module.exports = {
     // when Webpack loads them with a `require` statement. A lot of the magic of
     // Webpack is done using loaders. In this example, there's one loader declared
     // to use Babel to transform ES6 and JSX into ES5.
-    // 
     // `loaders` is an array of objects.
     loaders: [
       {
         // `test` is a test condition that causes the loader to be applied when a
         // filename passes. In this case, when any filename contains either `.js` or `.jsx`
         // as its terminating characters, this loader will be applied.
-        test: /\.jsx?$/, 
+        test: /\.jsx?$/,
 
         // `exclude` lets you specify tests that, when passed by a filename, cause those
         // files to *not* be transformed by the loader. There's also an `include` option
@@ -59,7 +58,7 @@ module.exports = {
         // this object requires 'babel-loader' to do the transformation.
         // We could actually apply multiple loaders here by using the property `loaders`
         // instead of `loader`, which takes an array of loader names.
-        // 
+
         // When you're declaring loaders in this field, you can leave off the `-loader` part
         // of the package name. Webpack will interpret `babel` as `babel-loader` here,
         // `coffee` as `coffee-loader`, etc. But you can also just write out `babel-loader`,
@@ -67,26 +66,29 @@ module.exports = {
         loader: 'babel',
 
         // `query` lets you pass options to the loader's process. The options that a loader takes
-        // are specific to each loader. In this case, `babel-loader` is being told to use the 'react'
-        // and 'es2015' presets when it transforms files. `query` becomes a query string, similar
-        // to what you see in request URLs, and the same thing could be achieved by writing this above:
+        // are specific to each loader. In this case,
+        // `babel-loader` is being told to use the 'react'
+        // and 'es2015' presets when it transforms files.
+        // `query` becomes a query string, similar
+        // to what you see in request URLs,
+        // and the same thing could be achieved by writing this above:
         // loader: 'babel?presets[]=react,presets[]=es2015'
         query: {
           presets: ['react', 'es2015'],
-        }
+        },
       },
 
       {
-        test: /\.jsx?$/, 
-        loader: "eslint-loader", 
-        exclude: /node_modules/
+        test: /\.jsx?$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
       },
 
       {
         test: /\.(scss|css)$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass'
+        loader:'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass',
       },
-    ]
+    ],
   },
   resolve: {
       extensions: ['', '.scss', '.js', '.json'],
@@ -99,8 +101,4 @@ module.exports = {
         'process.env.NODE_ENV': JSON.stringify('test')
       })
     ]
-
-
-
-
 };

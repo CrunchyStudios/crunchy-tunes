@@ -1,11 +1,10 @@
 import React from 'react';
 import Search from './search.jsx';
 
-var Nav = () => (
-  
+const Nav = ({handleSearch}) => (
+
   <nav className="navBar">
-   
-    <Search />
+    <Search handleSearch = {handleSearch} />
   </nav>
 );
 

@@ -1,35 +1,31 @@
 import React from 'react';
+import Input from 'react-toolbox/lib/input';
+
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: ''
+      searchText: null,
     };
   }
 
-  handleInputChange(e) {
-
+  handleChange(e) {
+    this.setState({
+      searchText: e,
+    });
+    this.props.handleSearch(e);
   }
 
   render() {
     return (
     <div className="search-bar form-inline">
-      <span> Search YouTube, SoundCloud and Spotify!</span>
-      <form> 
-      <input 
-        className="form-control"
-        type="text"
-        //here, we can implemenent onChange= 
-        //this will allow us to implement instant search
-          //every time the field changes, the search results update
-          />
-          <button type="submit">Search</button>
-
-          </form>
+      <Input type='text' label='Search YouTube, SoundCloud and Spotify!' icon='search'
+      onChange={this.handleChange.bind(this)} value ={this.state.searchText}  />
+      <button type="submit">Search</button>
     </div>
-    )
+    );
   }
 }
 
