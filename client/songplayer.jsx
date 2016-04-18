@@ -5,10 +5,11 @@ const SongPlayer = ({ track }) => {
 
   switch (track.apiSource) {
     case 'Spotify':
-      embed = <iframe src={`https://embed.spotify.com/?uri=spotify%3Atrack%3A${track.contentId}`} width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>;
+      embed = <iframe src={`https://embed.spotify.com/?uri=spotify%3Atrack%3A${track.contentId}`} width="500" height="80" frameBorder="0" allowTransparency="true"></iframe>;
       break;
     case 'SoundCloud':
-      embed = <iframe width="300" height="80" scrolling="no" frameBorder="no" src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track.contendId}0&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true`}></iframe>;
+      embed = <iframe width="500" height="80" scrolling="no" frameBorder="no" src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track.contentId}&color=orange_white`}></iframe>;
+
       break;
     case 'YouTube':
       embed = <iframe width="560" height="315" src={`https://www.youtube.com/embed/${track.contentId}`} frameBorder="0" allowFullScreen></iframe>;

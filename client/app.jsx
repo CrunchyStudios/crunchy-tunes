@@ -5,7 +5,7 @@ import CardsContainer from './cardsContainer.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import queryAll from './queryAll.js';
-
+import _ from 'underscore';
 
 class App extends React.Component {
   constructor(props) {
@@ -65,13 +65,11 @@ class App extends React.Component {
               }]}
             />
           </AppBar>
-          <Nav handleSearch = {this.handleSearch.bind(this)} />
+          <Nav handleSearch = { this.handleSearch.bind(this) } />
           <SongPlayer track = {this.state.currentTrack} />
           <CardsContainer tracks = {this.state.tracks}
             handleCardPlay = {this.handleCardPlay.bind(this)}
           />
-          }
-
       </div>
     );
   }

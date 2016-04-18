@@ -5,7 +5,7 @@ import App from '../app.jsx';
 
 describe('app', function () {
   it('renders without problems', function () {
-    var app = TestUtils.renderIntoDocument(<App/>);
+    var app = TestUtils.renderIntoDocument(<App />);
     expect(app).toBeDefined();
   });
 });
