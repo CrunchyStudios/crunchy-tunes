@@ -1,9 +1,7 @@
-import React from 'react';
 import SongPlayer from '../songplayer.jsx';
-import TestUtils from 'react-addons-test-utils';
 
-describe('SongPlayer', function() {
-  it('exists', function() {
+describe('SongPlayer', () => {
+  it('exists', () => {
     expect(SongPlayer).toBeDefined();
   });
 });

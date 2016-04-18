@@ -1,10 +1,10 @@
 import React from 'react';
-import Nav from '../nav.js'
+import Nav from '../nav.js';
 import TestUtils from 'react-addons-test-utils';
 
-describe('nav', function() {
-  it('renders without problems', function() {
-    var nav = TestUtils.renderIntoDocument(<Nav/>);
+describe('nav', () => {
+  it('renders without problems', () => {
+    const nav = TestUtils.renderIntoDocument(<Nav />);
     expect(nav).toBeDefined();
   });
 });
