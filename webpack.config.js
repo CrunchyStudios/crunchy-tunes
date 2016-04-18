@@ -1,6 +1,6 @@
 // webpack.config.js exports a configuration object in the CommonJS pattern.
 const webpack = require('webpack');
-
+const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
@@ -86,9 +86,12 @@ module.exports = {
 
       {
         test: /\.(scss|css)$/,
-        loader:'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass',
+        loader:'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass!toolbox',
       },
     ],
+  },
+  toolbox: {
+    theme: path.join(__dirname, 'client/styles/toolbox-theme.scss'),
   },
   resolve: {
       extensions: ['', '.scss', '.js', '.json'],

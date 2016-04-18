@@ -1,0 +1,70 @@
+//-- Sizing
+$unit: 14px !default;
+
+// -- Fonts
+$preferred-font: "Roboto", "Helvetica", "Arial", sans-serif !default;
+$font-size: 1.6 * $unit !default;
+$font-size-tiny: 1.2 * $unit !default;
+$font-size-small: 1.4 * $unit !default;
+$font-size-normal: $font-size !default;
+$font-size-big: 1.8 * $unit !default;
+$font-weight-thin: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-semi-bold: 500 !default;
+$font-weight-bold: 700 !default;
+
+$card-color-white: $color-white !default;
+$card-text-overlay: rgba($color-black, 0.35) !default;
+$card-background-color: $card-color-white !default;
+$card-padding-sm: .8 * $unit !default;
+$card-padding: 1.6 * $unit !default;
+$card-padding-lg: 2 * $unit !default;
+$card-font-size: $font-size-small !default;
+
+.card {
+  position: relative;
+  cursor: pointer;
+}
+
+
+.card-title {
+  font-size: $font-size-small;
+  font-family: $preferred-font;
+  font-weight: 300;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  position: relative;
+  color: #666666;
+}
+
+.source-logo {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 2;
+  filter: grayscale(50%);
+}
+
+.image-container {
+  position: relative;
+}
+
+.card:hover .card-overlay{ 
+  opacity: 0.1;
+}
+
+.card:hover .source-logo {
+  filter: none;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333333;
+  opacity: 0.0;
+  z-index: 1;
+}

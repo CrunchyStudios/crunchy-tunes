@@ -30,3 +30,5 @@ dpl_cd_upload/
 node_modules/
 bower_components/
 
+#OSX Metadata
+*.DS_Store
