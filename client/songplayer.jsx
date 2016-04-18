@@ -22,10 +22,8 @@ const SongPlayer = ({ track }) => {
   }
 
   return (
-    <div>
-      <div>Current Track: {embed}
-
-      </div>
+    <div className="songPlayer">
+      <div>Current Track: {embed}</div>
     </div>
   );
 };

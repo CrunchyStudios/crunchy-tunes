@@ -24,7 +24,6 @@ class Search extends React.Component {
     <div className="search-bar form-inline">
       <Input type="text" label="Search YouTube, SoundCloud and Spotify!" icon="search"
         onChange={this.handleChange.bind(this)} value ={this.state.searchText} />
-      <button type="submit">Search</button>
     </div>
     );
   }

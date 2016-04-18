@@ -56,7 +56,7 @@ class App extends React.Component {
     return (
       <div>
           <AppBar className="appBar" >
-            <Navigation type="horizontal" actions={[
+            <Navigation type="horizontal" style= { { width: '700px', }} actions={[
               {
                 label: 'Crunchy Tunes',
                 raised: true,
