@@ -33,7 +33,7 @@ $card-font-size: $font-size-small !default;
   font-weight: 300;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 5px;
+  padding-top: 10px;
   position: relative;
   color: #666666;
 }
@@ -44,6 +44,7 @@ $card-font-size: $font-size-small !default;
   right: 0px;
   z-index: 2;
   filter: grayscale(50%);
+  transition: filter 0.8s;
 }
 
 .image-container {
@@ -67,4 +68,5 @@ $card-font-size: $font-size-small !default;
   background-color: #333333;
   opacity: 0.0;
   z-index: 1;
+  transition: opacity 0.8s;
 }

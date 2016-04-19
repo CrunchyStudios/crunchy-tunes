@@ -1,7 +1,9 @@
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .navBar {

@@ -10,7 +10,7 @@ const CardsContainer = ({ tracks, handleCardPlay }) => {
     <Card onClick={() => handleCardPlay(track)}
       key={track.contentId}
       className={ClassNames(style['card'])}
-      style={{ width: '350px', height: '300px' }}
+      style={{ width: '350px', height: '300px', margin: '15px' }}
     >
       <div className={ClassNames(style['image-container'])}>
         <CardTitle
