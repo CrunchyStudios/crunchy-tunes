@@ -7,6 +7,14 @@
 }
 
 .navBar {
-  padding-top: 15px;
+  padding-top: 100px;
   width: 700px;
+}
+
+.appBar {
+  position: fixed;
+}
+
+.style__circular___2yZZn {
+  padding-top: 40px !important;
 }
